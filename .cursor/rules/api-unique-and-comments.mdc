@@ -1,0 +1,72 @@
+---
+description: 禁止重复接口/函数；文件与函数须写清楚注释
+alwaysApply: true
+---
+
+# 接口唯一性与注释规范
+
+## 禁止重复造轮子
+
+**坚决不能**为相同业务目的再建一套接口、API 封装或工具函数。
+
+新增前必做：
+
+1. **全局搜索**是否已有等价能力（路径、Repository 方法、`src/api/*.js`、同名 Service）。
+2. **能复用则复用**：扩展现有端点/函数参数，或在前端统一 import 已有 `@/api/xxx`。
+3. **必须新建时**，在注释中说明与相近接口的差异，以及为何不合并。
+
+```text
+❌ 已有 POST /api/Doctor/GetAll，又加 GET /api/Doctor/list 返回同样医生列表
+❌ 已有 getDoctorByWorkNo，又在页面里再写一套 request({ url: '/api/Doctor/...' })
+✅ 工号查询与 CRUD 统一走 @/api/doctor.js；列表分页走 Doctor/GetPageList
+```
+
+同一层只保留**一个入口**：后端 Controller 方法 ↔ 前端 `api/` 封装 ↔ 页面调用，避免多层各写一遍。
+
+## 文件注释
+
+新建或大幅改动的业务文件，文件顶部（或模块首段）须简要说明：
+
+- **职责**（管什么业务）
+- **主要消费者**（哪个页面/服务在用）
+- **关键依赖**（调哪些表、哪些外部接口）
+
+```java
+/** 医生业务档案接口：供后台排班、档案页、HIS 同步调用 */
+@RestController
+@RequestMapping("/Doctor")
+```
+
+```javascript
+/**
+ * 医生业务档案 API（doctor 表）
+ * 消费者：DoctorProfile 工号核对、doctorSchedule 医生下拉
+ */
+```
+
+## 函数 / 方法注释
+
+对外接口、Service 公共方法、前端 `api/` 导出函数、页面中非显而易见的 methods，须写清楚：
+
+- **做什么**（一句话）
+- **入参 / 出参**（字段含义、空值语义）
+- **与谁重复时**：为何保留、与相近函数区别
+
+```java
+/** 按工号或 doctor.id 查询业务档案，供展示档案页核对；未找到返回 404 */
+@PostMapping("/GetByWorkNo")
+public ResultData<Doctor> getByWorkNo(@RequestBody Map<String, Object> body)
+```
+
+```javascript
+/** 按工号查询 doctor 表；404 表示业务档案不存在，可继续手动录入 */
+export function getDoctorByWorkNo(workNo) { ... }
+```
+
+私有辅助函数：仅当逻辑非一目了然时加注释；禁止用注释重复代码字面意思。
+
+## 交付检查
+
+- [ ] 已搜索，无同职责重复接口/函数
+- [ ] 新文件、新公共函数有注释
+- [ ] 修改已有接口时，同步更新注释与所有调用方（不留下废弃副本）

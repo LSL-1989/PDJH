@@ -1,0 +1,55 @@
+---
+description: 对完交付后关闭本次测试启动的本地服务/进程，避免端口占用
+alwaysApply: true
+---
+
+# 对完后关闭测试进程
+
+每次任务**交付结束前**（自测完成、回复用户前），必须清理本会话为测试/联调启动的本地进程，禁止把占用端口的后台服务留给用户。
+
+## 必须清理的对象
+
+- 本会话启动或重启过的：`pdjh-server`（`mvnw spring-boot:run` / `java`）、各终端 `npm run dev` / `vite`
+- 为验证接口额外拉起的代理、临时脚本、后台 Shell 任务
+
+## 可不清理
+
+- 用户声明要常驻、或任务开始前就已在跑且本次未重启的服务
+- 与本仓库无关的系统进程
+
+若无法区分：优先释放本仓库常用端口上的监听进程（见下），并在回复中写明杀了什么。
+
+## 本仓库常用测试端口
+
+| 端口 | 典型进程 |
+|------|----------|
+| 8081 | `pdjh-server`（`SERVER_PORT` 另指定时一并查） |
+| 5173 / 5175 | Vite 前端终端（候诊大屏、护士站、门边屏等） |
+| 9091 | 若本会话启用过相关服务 |
+
+## PowerShell 清理示例
+
+注意：勿用 `$pid`（PowerShell 只读自动变量），用 `$procId`。
+
+```powershell
+$ports = 8081, 5173, 5175
+foreach ($port in $ports) {
+  $procIds = @(Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue |
+    Select-Object -ExpandProperty OwningProcess -Unique)
+  foreach ($procId in $procIds) {
+    $p = Get-Process -Id $procId -ErrorAction SilentlyContinue
+    if ($p -and $p.ProcessName -match '^(java|node)$') {
+      Stop-Process -Id $procId -Force -ErrorAction SilentlyContinue
+      Write-Host "Stopped $($p.ProcessName) PID $procId on :$port"
+    }
+  }
+}
+```
+
+也可用 Cursor terminals 里本会话拉起的任务：对仍在跑的测试命令执行停止/结束对应 Shell。
+
+## 交付检查
+
+- [ ] 本会话为自测启动的后端/前端进程已停止
+- [ ] 常用端口已确认空闲，或说明用户要求保留的常驻服务
+- [ ] 回复里可一句带过「已关闭测试进程」，无需冗长

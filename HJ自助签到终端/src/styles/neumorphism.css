@@ -1,0 +1,215 @@
+/**
+ * 深色医疗科技风设计令牌与通用控件（源：design-tokens/theme.json）
+ * 消费者：SignIn、BindingGuide、App、ScreenFrame
+ * 保留 neu-* 类名以兼容页面；语义已切换为玻璃面板 + 轻青光
+ */
+
+:root {
+  /* token → CSS */
+  --color-primary: #2dd4bf;
+  --color-primary-hover: #5eead4;
+  --color-secondary: #38bdf8;
+  --color-background: #0b1520;
+  --color-background-elevated: #122636;
+  --color-surface: rgba(18, 38, 54, 0.55);
+  --color-surface-elevated: rgba(30, 58, 82, 0.45);
+  --color-border: rgba(148, 163, 184, 0.22);
+  --color-text: #e2e8f0;
+  --color-text-secondary: rgba(226, 232, 240, 0.72);
+  --color-text-highlight: #f8fafc;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --glass-blur: 16px;
+  --motion-duration: 200ms;
+  --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 兼容层：页面仍引用 --neu-* */
+  --neu-bg: var(--color-background);
+  --neu-bg-elevated: var(--color-background-elevated);
+  --neu-text: var(--color-text);
+  --neu-accent: var(--color-primary);
+  --neu-accent-dark: var(--color-primary-hover);
+  --neu-placeholder: rgba(226, 232, 240, 0.45);
+  --neu-muted: var(--color-text-secondary);
+  --neu-error: var(--color-error);
+  --neu-success: var(--color-success);
+  --neu-warning: var(--color-warning);
+  --neu-highlight: var(--color-text-highlight);
+  --neu-border: var(--color-border);
+  --neu-surface: var(--color-surface);
+  --neu-surface-elevated: var(--color-surface-elevated);
+  --neu-glow: 0 0 24px rgba(45, 212, 191, 0.12);
+  --neu-raised:
+    0 8px 28px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    var(--neu-glow);
+  --neu-raised-hover:
+    0 10px 32px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 28px rgba(45, 212, 191, 0.18);
+  --neu-inset:
+    inset 0 2px 8px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+  --neu-inset-focus:
+    inset 0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(45, 212, 191, 0.45),
+    0 0 0 3px rgba(45, 212, 191, 0.12);
+  --neu-font: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
+}
+
+html,
+body,
+#app {
+  background-color: var(--neu-bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(45, 212, 191, 0.14), transparent 55%),
+    linear-gradient(165deg, var(--color-background) 0%, var(--color-background-elevated) 100%);
+  color: var(--neu-text);
+  font-family: var(--neu-font);
+}
+
+/* 玻璃凸起面板 */
+.neu-raised {
+  background: var(--neu-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--neu-border);
+  box-shadow: var(--neu-raised);
+}
+
+/* 凹陷输入区 */
+.neu-inset {
+  background: rgba(8, 16, 28, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  box-shadow: var(--neu-inset);
+}
+
+/* 主按钮：青蓝玻璃 */
+.neu-btn-primary {
+  display: block;
+  width: 100%;
+  height: 54px;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-radius: var(--radius-lg);
+  background: rgba(45, 212, 191, 0.14);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--neu-raised);
+  color: var(--neu-highlight);
+  font-family: var(--neu-font);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    box-shadow var(--motion-duration) var(--motion-easing),
+    color var(--motion-duration) var(--motion-easing),
+    background var(--motion-duration) var(--motion-easing),
+    border-color var(--motion-duration) var(--motion-easing);
+}
+
+.neu-btn-primary:hover:not(:disabled) {
+  box-shadow: var(--neu-raised-hover);
+  background: rgba(45, 212, 191, 0.22);
+  border-color: rgba(45, 212, 191, 0.5);
+  color: var(--neu-highlight);
+}
+
+.neu-btn-primary:active:not(:disabled) {
+  box-shadow: var(--neu-inset);
+  background: rgba(45, 212, 191, 0.18);
+  color: var(--neu-accent-dark);
+}
+
+.neu-btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 次要按钮 */
+.neu-btn-secondary {
+  display: block;
+  width: 100%;
+  height: 54px;
+  border: 1px solid var(--neu-border);
+  border-radius: var(--radius-lg);
+  background: var(--neu-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--neu-raised);
+  color: var(--neu-text);
+  font-family: var(--neu-font);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    box-shadow var(--motion-duration) var(--motion-easing),
+    color var(--motion-duration) var(--motion-easing),
+    background var(--motion-duration) var(--motion-easing);
+}
+
+.neu-btn-secondary:hover:not(:disabled) {
+  box-shadow: var(--neu-raised-hover);
+  background: var(--neu-surface-elevated);
+}
+
+.neu-btn-secondary:active:not(:disabled) {
+  box-shadow: var(--neu-inset);
+  color: var(--neu-accent);
+}
+
+.neu-btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 凹陷输入框 */
+.neu-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 14px;
+  background: rgba(8, 16, 28, 0.45);
+  box-shadow: var(--neu-inset);
+  color: var(--neu-highlight);
+  font-family: var(--neu-font);
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transition: box-shadow var(--motion-duration) var(--motion-easing);
+}
+
+.neu-input::placeholder {
+  color: var(--neu-placeholder);
+}
+
+.neu-input:focus {
+  box-shadow: var(--neu-inset-focus);
+  border-color: rgba(45, 212, 191, 0.4);
+}
+
+/* 玻璃卡片 */
+.neu-card {
+  background: var(--neu-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--neu-raised);
+  border: 1px solid var(--neu-border);
+}
+
+/* 数据高光文字 */
+.neu-data {
+  color: var(--neu-highlight);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}

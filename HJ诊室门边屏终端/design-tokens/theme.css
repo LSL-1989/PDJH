@@ -1,0 +1,57 @@
+/**
+ * 诊室门边屏终端视觉主题（design-tokens/theme.json 同步层）
+ * 消费者：全部 Vue 页面与组件
+ */
+:root {
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #38bdf8;
+  --color-primary-deep: #0284c7;
+  --color-primary-dim: rgba(14, 165, 233, 0.1);
+  --color-primary-glow: rgba(14, 165, 233, 0.25);
+  --color-background: #f0f9ff;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f8fafc;
+  --color-border: #bae6fd;
+  --color-text-primary: #0c4a6e;
+  --color-text-secondary: #64748b;
+  --color-text-inverse: #ffffff;
+  --color-accent: #6366f1;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  /* 诊室门边屏语义色 */
+  --color-header-bg: linear-gradient(135deg, #0284c7 0%, #0ea5e9 55%, #38bdf8 100%);
+  --color-header-text: #ffffff;
+  --color-footer-bg: #0369a1;
+  --color-footer-text: #f0f9ff;
+  --color-footer-text-muted: rgba(255, 255, 255, 0.65);
+  --color-doctor-panel: #ffffff;
+  --color-current-panel: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%);
+  --color-waiting-panel: #e0f2fe;
+  --color-bulletin-bg: #f8fafc;
+  --color-patient-highlight: rgba(255, 255, 255, 0.72);
+  --color-mask: rgba(255, 255, 255, 0.88);
+  --color-frame-outer: linear-gradient(160deg, #dbeafe 0%, #bfdbfe 50%, #e0f2fe 100%);
+  --color-card-surface: #ffffff;
+  --color-card-border: rgba(14, 165, 233, 0.22);
+  --color-grid-line: rgba(14, 165, 233, 0.07);
+  --color-border-accent: rgba(14, 165, 233, 0.28);
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+
+  --shadow-glow: 0 4px 20px rgba(14, 165, 233, 0.22);
+  --shadow-panel: 0 6px 20px rgba(0, 32, 74, 0.1), 0 2px 6px rgba(0, 32, 74, 0.06);
+  --shadow-card: 0 12px 40px rgba(14, 165, 233, 0.14), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-header: 0 4px 16px rgba(2, 132, 199, 0.2);
+
+  --motion-duration: 150ms;
+  --motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
+}

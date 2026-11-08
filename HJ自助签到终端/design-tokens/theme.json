@@ -1,0 +1,65 @@
+{
+  "name": "dark-medical-tech",
+  "label": "深色医疗科技风",
+  "version": 1,
+  "preset": null,
+  "colors": {
+    "primary": "#2DD4BF",
+    "primaryHover": "#5EEAD4",
+    "secondary": "#38BDF8",
+    "background": "#0B1520",
+    "backgroundElevated": "#122636",
+    "surface": "rgba(18, 38, 54, 0.55)",
+    "surfaceElevated": "rgba(30, 58, 82, 0.45)",
+    "border": "rgba(148, 163, 184, 0.22)",
+    "text": {
+      "primary": "#E2E8F0",
+      "secondary": "rgba(226, 232, 240, 0.72)",
+      "inverse": "#0B1520",
+      "highlight": "#F8FAFC"
+    },
+    "accent": "#2DD4BF",
+    "success": "#34D399",
+    "warning": "#FBBF24",
+    "error": "#F87171"
+  },
+  "typography": {
+    "fontFamily": {
+      "sans": "'Plus Jakarta Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif",
+      "mono": "'Plus Jakarta Sans', ui-monospace, monospace"
+    },
+    "scale": "comfortable",
+    "weight": {
+      "normal": 400,
+      "medium": 500,
+      "bold": 700
+    }
+  },
+  "shape": {
+    "radius": {
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "20px",
+      "full": "9999px"
+    }
+  },
+  "spacing": {
+    "unit": "4px",
+    "scale": "comfortable"
+  },
+  "effects": {
+    "glass": true,
+    "glassBlur": "16px",
+    "glassOpacity": 0.45,
+    "shadow": "soft",
+    "glow": true
+  },
+  "motion": {
+    "duration": "200ms",
+    "durationSlow": "300ms",
+    "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+  },
+  "styleTags": ["medical", "tech", "glass", "dark"],
+  "notes": "深色医疗科技风，青蓝、生命绿、警示红、白色数据高光，玻璃面板，柔和但专业，避免过度压迫感"
+}

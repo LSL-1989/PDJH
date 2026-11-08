@@ -1,0 +1,62 @@
+server:
+  # 与本机 8081 被占用时：$env:SERVER_PORT=8082
+  port: ${SERVER_PORT:8081}
+  servlet:
+    context-path: /api
+
+spring:
+  # 可选本地覆盖：在 resources 或启动目录放置 application-local.yml，再用
+  # --spring.config.import=optional:classpath:application-local.yml（勿写死在主配置里，避免个别环境下整份 yml 失效）
+  application:
+    name: pdjh-server
+  data:
+    redis:
+      # 与 Redisson、Spring Data Redis 共用。默认连本机 Redis（见仓库根 docker-compose-infra.yml）
+      # 院内/生产：REDIS_HOST=<内网地址>（需 VPN 或内网），端口 6379，密码见环境变量
+      # 真实密码不入库：请通过环境变量 REDIS_PASSWORD 或 application-local.yml 提供
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      database: ${REDIS_DATABASE:0}
+      password: ${REDIS_PASSWORD:change-me}
+      # 仅使用 JPA 仓储，禁用 Redis 仓储扫描以消除启动期误识别日志
+      repositories:
+        enabled: false
+  datasource:
+    # 本地 MySQL；生产/云端可通过环境变量覆盖
+    # 真实口令不入库：请通过环境变量 DB_USERNAME / DB_PASSWORD 或 application-local.yml 提供
+    url: ${DATASOURCE_URL:jdbc:mysql://localhost:3306/pdjh?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:change-me}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    # REST 无视图层懒加载需求，关闭以消除警告并避免事务外访问代理
+    open-in-view: false
+
+  # Spring Security（勿写在 management 下，否则不会生效）
+  security:
+    user:
+      name: ${API_ADMIN_USER:his_admin}
+      password: ${API_ADMIN_PWD:change-me}
+
+# 引入 actuator 用于配合 docker 或 k8s 健康检查，彻底切分监控至 9091
+management:
+  server:
+    port: 9091 # 切断公网反扫可能暴露的核心指标
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      hisClient:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50

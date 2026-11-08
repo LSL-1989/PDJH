@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exit_hint">再按一次返回键退出维护模式</string>
+    <string name="server_config_title">服务地址配置</string>
+    <string name="server_config_message">终端类型：%1$s\n设备 ID：%2$s\n\n填写内网服务根地址（不含末尾斜杠），空则 H5 使用相对路径 /api。</string>
+    <string name="server_base_hint">例如 http://192.168.0.75:5181</string>
+    <string name="save">保存并重载</string>
+    <string name="reset_default">恢复默认</string>
+    <string name="server_saved">已保存，正在重载…</string>
+    <string name="server_reset">已恢复默认地址，正在重载…</string>
+</resources>

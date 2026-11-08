@@ -1,0 +1,23 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+*.ap_
+*.dex
+output.json
+/_gradle_extract
+/gradle-8.13-bin.zip
+
+# 签名密钥与密码（勿提交）
+/keystore.properties
+/keystore/
+*.jks
+*.keystore
+

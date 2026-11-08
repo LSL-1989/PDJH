@@ -1,0 +1,8 @@
+-- [已废弃] 本文件字段名与当前 JPA 实体不一致，勿再导入。
+--
+-- 推荐流程：
+--   1) CREATE DATABASE pdjh;
+--   2) 启动 pdjh-server（ddl-auto=update 自动建表）
+--   3) mysql ... pdjh < scripts/seed_pdjh_test_data.sql
+--
+-- 命名约定：pdjh-server/SCHEMA_NAMING.md

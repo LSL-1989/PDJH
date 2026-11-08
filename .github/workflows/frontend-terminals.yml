@@ -1,0 +1,85 @@
+name: Frontend Build
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - 'HJ候诊区大屏/**'
+      - 'HJ诊室门边屏终端/**'
+      - 'HJ自助签到终端/**'
+      - 'HJ管理后台/Gocent.Manager/**'
+      - 'packages/common/**'
+      - 'scripts/build-*.ps1'
+      - 'package.json'
+      - '.github/workflows/frontend-terminals.yml'
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - 'HJ候诊区大屏/**'
+      - 'HJ诊室门边屏终端/**'
+      - 'HJ自助签到终端/**'
+      - 'HJ管理后台/Gocent.Manager/**'
+      - 'packages/common/**'
+      - 'package.json'
+      - '.github/workflows/frontend-terminals.yml'
+
+jobs:
+  build-screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: HJ候诊区大屏/package-lock.json
+      - name: Install & build screen
+        working-directory: HJ候诊区大屏
+        run: |
+          npm ci || npm install
+          npm run build
+
+  build-clinic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: HJ诊室门边屏终端/package-lock.json
+      - name: Install & build clinic
+        working-directory: HJ诊室门边屏终端
+        run: |
+          npm ci || npm install
+          npm run build
+
+  build-checkin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: HJ自助签到终端/package-lock.json
+      - name: Install & build checkin
+        working-directory: HJ自助签到终端
+        run: |
+          npm ci || npm install
+          npm run build
+
+  build-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: npm
+          cache-dependency-path: HJ管理后台/Gocent.Manager/package-lock.json
+      - name: Install & build admin
+        working-directory: HJ管理后台/Gocent.Manager
+        run: |
+          npm ci || npm install
+          npm run build:prod

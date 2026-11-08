@@ -1,0 +1,34 @@
+{
+  "name": "vue-h5",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:lan": "vite --host",
+    "build": "vue-tsc -b && vite build",
+    "build:app": "vite build",
+    "preview:lan": "vite preview --host --port 5174",
+    "android:lan": "vite build && vite preview --host --port 5174",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@pdjh/common": "file:../packages/common",
+    "@iconify/vue": "^5.0.1",
+    "axios": "^1.13.6",
+    "vant": "^4.9.22",
+    "vue": "^3.5.30",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.0",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vue/tsconfig": "^0.9.0",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.0",
+    "vue-tsc": "^3.2.5"
+  }
+}

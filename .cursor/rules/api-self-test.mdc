@@ -1,0 +1,38 @@
+---
+description: 新增或修改业务接口时必须自测通过后再交付
+alwaysApply: true
+---
+
+# 业务接口自测要求
+
+新增或修改业务接口（后端 Controller/Service、前端 API 封装、页面调用）时，**必须自测通过**才能视为完成，禁止只写代码不验证。
+
+## 完成前必做
+
+1. **启动或确认后端可用**（本仓库默认 `pdjh-server`，端口见 `application.yml` / 代理 `vue.config.js`）。
+2. **实际发起请求**，验证成功路径与常见失败路径（参数缺失、记录不存在等）。
+3. **前后端参数方式一致**：本仓库业务接口多为 `POST + JSON body`；若用 `@RequestParam`，前端须用 query/form，不能假设 `data` 会自动映射。
+4. **在回复中简要说明测了什么**：接口路径、请求示例、预期与实际结果（含 HTTP 状态与 `code`/`msg`）。
+
+## 自测方式（任选其一，优先真实请求）
+
+```powershell
+# 示例：POST JSON（与 axios request data 一致）
+Invoke-RestMethod -Uri "http://127.0.0.1:8081/api/Doctor/GetByWorkNo" `
+  -Method POST -ContentType "application/json" `
+  -Body '{"workNo":"D001"}'
+```
+
+- 后端单元/集成测试（如有）跑通相关用例
+- 前端 dev 环境下通过页面或 Network 面板验证
+
+## 未自测不得交付
+
+- 环境不可用（后端未启动、无 Maven 等）时：**明确说明阻塞原因**，并给出用户可执行的验证步骤；不得假装已测通。
+- 发现 4xx/5xx 或前后端字段不一致：**先修再交付**，不要把未验证的接口留给用户试。
+
+## 本仓库常见踩坑
+
+- 代理路径：`/dev-api` → 后端 `context-path` `/api`
+- 统一响应：`ResultData` 的 `code` 200/400 与 HTTP 状态可能不一致；404 业务码会走 axios 拦截器 reject
+- 改 Repository 衍生查询或新端点后需**重启后端**再测

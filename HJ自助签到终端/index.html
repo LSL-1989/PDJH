@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>HJ自助签到终端</title>
+    <style>
+      /* 首屏兜底：JS 崩溃时也能看到原因（平板 Chrome 白屏排查） */
+      #pdjh-boot-error {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        box-sizing: border-box;
+        padding: 24px;
+        background: #0b1520;
+        color: #fecaca;
+        font: 14px/1.5 sans-serif;
+        white-space: pre-wrap;
+        overflow: auto;
+      }
+    </style>
+    <script>
+      (function () {
+        function show(msg) {
+          var el = document.getElementById('pdjh-boot-error')
+          if (!el) return
+          el.style.display = 'block'
+          el.textContent = String(msg || '未知错误')
+        }
+        window.addEventListener('error', function (e) {
+          show((e && e.message ? e.message : 'error') + '\n' + (e && e.filename ? e.filename + ':' + e.lineno : ''))
+        })
+        window.addEventListener('unhandledrejection', function (e) {
+          var r = e && e.reason
+          show('Promise: ' + (r && r.message ? r.message : r))
+        })
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="pdjh-boot-error"></div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

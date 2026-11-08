@@ -1,0 +1,16 @@
+{
+  "name": "queue-number-calling",
+  "version": "1.0.0",
+  "description": "医院排队叫号系统",
+  "private": true,
+  "scripts": {
+    "build:screen": "npm run build --prefix HJ候诊区大屏",
+    "build:clinic": "npm run build --prefix HJ诊室门边屏终端",
+    "build:checkin": "npm run build --prefix HJ自助签到终端",
+    "build:admin": "npm run build:prod --prefix HJ管理后台/Gocent.Manager",
+    "build:displays": "npm run build:screen && npm run build:clinic",
+    "build:terminals": "npm run build:displays && npm run build:checkin",
+    "build:frontends": "npm run build:terminals && npm run build:admin",
+    "smoke:terminals": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/smoke-terminals.ps1"
+  }
+}

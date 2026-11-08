@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Gocent.CallStation</RootNamespace>
+    <AssemblyName>Gocent.CallStation</AssemblyName>
+    <AssemblyTitle>HJ叫号器</AssemblyTitle>
+    <Product>HJ叫号器</Product>
+    <ApplicationIcon>Assets\Caller.ico</ApplicationIcon>
+    <StartupObject>Gocent.CallStation.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Caller.png" />
+    <None Include="Assets\Caller.ico" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # -----------------------------------------------------
+  # 1. 核心关系型数据库底座 - MySQL 8.0
+  # -----------------------------------------------------
+  mysql:
+    image: mysql:8.0
+    container_name: pdjh-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-me}
+      MYSQL_DATABASE: pdjh
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      # 持久化存储映射，防止容器重启销毁数据
+      - ./infra-data/mysql_data:/var/lib/mysql
+      # 表结构由 pdjh-server JPA 生成；测试数据见 scripts/seed_pdjh_test_data.sql（勿再用 mock_db_init.sql）
+    command: 
+      # 必须设定中文字符集与不区分大小写，以迎合医疗行业旧数据兼容特点
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_general_ci
+      - --lower_case_table_names=1
+
+  # -----------------------------------------------------
+  # 2. 分布式锁与高速缓存枢纽 - Redis 7.0
+  # -----------------------------------------------------
+  redis:
+    image: redis:7.0-alpine
+    container_name: pdjh-redis
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./infra-data/redis_data:/data
+    command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD:-change-me}"

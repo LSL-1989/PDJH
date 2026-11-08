@@ -1,0 +1,12 @@
+@import './styles/nurse-desk.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  background: var(--nd-bg);
+  color: var(--nd-text);
+}

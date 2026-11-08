@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢匠·序流 | 三甲全院排队叫号系统</title>
+    <!-- 全球统一中文极简字体，剔除一切英文界面要素 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 超多层次的动态漂浮气泡层，增加灵动感 -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- 顶部滑入导航 -->
+    <nav class="navbar glass-panel slide-down">
+        <div class="logo">
+            <img src="assets/logo.png" alt="欢匠序流 Logo" class="brand-logo">
+            欢匠-序流
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">产品阵列定位</a></li>
+            <li><a href="#scenarios">全院大屏叫号场景</a></li>
+            <li><a href="#features">调度司令部支撑</a></li>
+        </ul>
+        <button class="btn-primary pulse-btn">预约现场大屏演示</button>
+    </nav>
+
+    <main>
+        <!-- 产品定位：第一视觉冲击区 -->
+        <section id="hero" class="hero">
+            <h1 class="hero-title reveal-text">重塑就医秩序。<br><span class="gradient-text">新一代全院排队叫号系统</span></h1>
+            <p class="hero-subtitle fade-up delay-1">不仅是化繁为简的排队发号机器，更是重构全院医患信任分的调度大脑。<br>为门诊、药房、医技等全科室提供智能排队算法与分布式大屏呼叫，让高压环境归于宁静。</p>
+            <div class="hero-cta fade-up delay-2">
+                <button class="btn-primary large hover-lift">浏览终端大屏画册</button>
+                <button class="btn-secondary large hover-lift">获取三甲替换竞品方案</button>
+            </div>
+        </section>
+
+        <!-- 海报场景交织展示块 (集成纯代码 CSS 原生微缩图) -->
+        <section id="scenarios" class="scenarios-section">
+            <h2 class="section-title fade-up">从局部单诊室到全院大屏的彻底接管</h2>
+            <p class="section-desc fade-up">深入五大核心就医环节，用极速排队叫号算法抚平拥挤褶皱</p>
+            
+            <div class="scenario-grid">
+                
+                <!-- 门诊 -->
+                <div class="scenario-card parallax-card fade-in-left">
+                    <div class="card-ui-mockup">
+                        <div class="ui-header">骨科门诊 二诊室叫号大屏</div>
+                        <div class="ui-body">
+                            <div class="ui-calling pulse-bg">
+                                <span>▶ 正在就诊</span>
+                                <h2>NO.014 张*明</h2>
+                            </div>
+                            <div class="ui-wait-list">
+                                <div class="ui-wait-item">准备: 015号 李*娟</div>
+                                <div class="ui-wait-item">等候: 016号 王*国</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>智慧门诊叫号大屏</h3>
+                        <p><b>精准排队拦截，智能语音播报。</b><br>系统强制实地手机扫码报到，将盲目的拥挤推流防区前置。候诊区专属排队大屏清晰轮播等候序列，伴随智能语音按序叫号，让门诊大厅重回可以深呼吸的宁静。</p>
+                    </div>
+                </div>
+
+                <!-- 药房 -->
+                <div class="scenario-card parallax-card fade-in-right delay-1">
+                    <div class="card-ui-mockup mockup-pharmacy">
+                        <div class="ui-header">中药房 综合发药叫号大屏</div>
+                        <div class="ui-grid">
+                            <div class="ui-box ready">2号窗: 1045 李*辉</div>
+                            <div class="ui-box ready">3号窗: 1046 赵*芬</div>
+                            <div class="ui-box prep">配药中: 1047...</div>
+                            <div class="ui-box prep">配药中: 1048...</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>药房排队取药大屏</h3>
+                        <p><b>处方排号先行，即拿即走。</b><br>打破“数百人围栏等药”的焦灼僵局。缴费后处方秒级入列药房后台，综合发药大屏动态指配呼叫专属取药窗口。彻底把控现场秩序，极致提效。</p>
+                    </div>
+                </div>
+
+                <!-- 检验 -->
+                <div class="scenario-card parallax-card fade-in-left">
+                    <div class="card-ui-mockup mockup-lab">
+                        <div class="ui-header">生化检验中心 采血叫号追踪链</div>
+                        <div class="ui-timeline">
+                            <div class="tl-item done">样本采集叫号完成 (09:15)</div>
+                            <div class="tl-item done">上机追踪流转 (09:40)</div>
+                            <div class="tl-item active glow-text">出具报告 ➔ 呼叫全院系统插队</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>中心采血与检验排号</h3>
+                        <p><b>一码排队通采，结果回流插队闭环。</b><br>终结杂乱无章的抢位化验队伍，完全交由采血屏按顺位叫号。检验报告一经出具，患者排号身份即刻被系统唤醒，智能切入原医师复诊呼叫列表前位。</p>
+                    </div>
+                </div>
+
+                <!-- 医技 -->
+                <div class="scenario-card parallax-card fade-in-right delay-1">
+                    <div class="card-ui-mockup mockup-imaging">
+                        <div class="ui-header">核磁共振(MRI) 检查室门外大屏</div>
+                        <div class="ui-slots">
+                            <div class="slot occupied">08:00 - 08:30 (排期已占用)</div>
+                            <div class="slot calling">08:30 - 09:00 (呼叫检查中 ▶)</div>
+                            <div class="slot waiting">09:00 - 09:30 (排队候检)</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>医技检查精准限号大屏</h3>
+                        <p><b>防突防撞插队，高精排号引擎。</b><br>直击超声与 MRI 检查走廊的漫长等候痛点。引入高精度的防冲突时段排队算法，检查室大屏按号呼入，从根本上消解重型昂贵资源的分配矛盾。</p>
+                    </div>
+                </div>
+
+                <!-- 体检 -->
+                <div class="scenario-card parallax-card fade-in-up">
+                    <div class="card-ui-mockup mockup-checkup">
+                        <div class="ui-header">全流程体检 动态叫号房门分配</div>
+                        <div class="ui-graph">
+                            <div class="node green">✔ 抽血处 (叫号已结束)</div>
+                            <div class="flow-arrow">➔</div>
+                            <div class="node blue">👀 测视力 (无排队)</div>
+                            <div class="flow-arrow opacity-50">➔</div>
+                            <div class="node gray">B超室 (排队极度拥堵)</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>体检多室流转动态排号</h3>
+                        <p><b>全局排队打通，告别盲目推门。</b><br>系统大屏实时侦测各科室机器当前吞吐量，动态为受检者规划“避堵”的下一个叫号诊室。各屋联动播报叫号，体检再也不用拼体力抢位排队。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 摆脱技术词汇，全面走向业务价值体验的功能模块 -->
+        <section id="features" class="features-section">
+            <h2 class="section-title fade-up">不仅是基础排队叫号机，更是全院大屏调度司令部</h2>
+            
+            <div class="feature-boxes">
+                <div class="feature-box glass-panel floating fade-up">
+                    <div class="icon-orb">屏</div>
+                    <h3>海量叫号终端联控分布式</h3>
+                    <p>全院分布着上百块大小宣发叫号屏、门牌屏及语音长廊播报器，管理层可纵览全局推流设备状态。</p>
+                </div>
+                
+                <div class="feature-box glass-panel floating fade-up delay-1">
+                    <div class="icon-orb">权</div>
+                    <h3>护士站排队干预强行舱</h3>
+                    <p>赋予现场大堂导医长强制“挽救缺号跳过”、“军烈属特殊直插防插队”的雷霆干预权限，从容解决乱局。</p>
+                </div>
+
+                <div class="feature-box glass-panel floating fade-up delay-2">
+                    <div class="icon-orb">磐</div>
+                    <h3>高压叫号分发压舱底座</h3>
+                    <p>无视周一清晨挂号与急诊退号的万人超级洪峰，基于异步排队架构死锁底层并发抗穿透，叫号呼出稳如泰山不漏音。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-panel">
+        <p>欢匠·序流 · 核心大部缔造 · 专属赋能公立三甲全院分布式排队叫号系统生态</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

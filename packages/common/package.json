@@ -1,0 +1,27 @@
+{
+  "name": "@pdjh/common",
+  "version": "1.0.0",
+  "description": "Common utilities for pdjh",
+  "type": "module",
+  "main": "src/index.js",
+  "types": "src/pdjh-common.d.ts",
+  "exports": {
+    ".": "./src/index.js",
+    "./terminalBinding": {
+      "types": "./src/pdjh-common.d.ts",
+      "default": "./src/terminalBinding.js"
+    },
+    "./androidNative.mock": {
+      "types": "./src/pdjh-common.d.ts",
+      "default": "./src/androidNative.mock.js"
+    },
+    "./desensitize": {
+      "types": "./src/pdjh-common.d.ts",
+      "default": "./src/desensitize.js"
+    }
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "@stomp/stompjs": "^7.0.0"
+  }
+}

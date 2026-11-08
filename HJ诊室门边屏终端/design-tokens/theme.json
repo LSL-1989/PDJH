@@ -1,0 +1,63 @@
+{
+  "name": "clinic-screen-bright",
+  "label": "诊室门边屏·明亮科技",
+  "version": 3,
+  "preset": "tech",
+  "colors": {
+    "primary": "#0EA5E9",
+    "primaryHover": "#38BDF8",
+    "secondary": "#64748B",
+    "background": "#F0F9FF",
+    "surface": "#FFFFFF",
+    "surfaceElevated": "#F8FAFC",
+    "border": "#BAE6FD",
+    "text": {
+      "primary": "#0C4A6E",
+      "secondary": "#64748B",
+      "inverse": "#FFFFFF"
+    },
+    "accent": "#6366F1",
+    "success": "#22C55E",
+    "warning": "#F59E0B",
+    "error": "#EF4444"
+  },
+  "typography": {
+    "fontFamily": {
+      "sans": "'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+      "mono": "'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace"
+    },
+    "scale": "comfortable",
+    "weight": {
+      "normal": 400,
+      "medium": 500,
+      "bold": 600
+    }
+  },
+  "shape": {
+    "radius": {
+      "sm": "4px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "full": "9999px"
+    }
+  },
+  "spacing": {
+    "unit": "4px",
+    "scale": "comfortable"
+  },
+  "effects": {
+    "glass": false,
+    "glassBlur": "12px",
+    "glassOpacity": 0.72,
+    "shadow": "soft",
+    "glow": false
+  },
+  "motion": {
+    "duration": "150ms",
+    "durationSlow": "350ms",
+    "easing": "cubic-bezier(0.16, 1, 0.3, 1)"
+  },
+  "styleTags": ["tech", "bright", "clean"],
+  "notes": "明亮的主题色"
+}

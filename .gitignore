@@ -1,0 +1,85 @@
+# ===== 依赖 =====
+node_modules/
+.pnpm-store/
+
+# ===== 前端构建产物 =====
+dist/
+dist-ssr/
+build/
+.output/
+.umi/
+*.tsbuildinfo
+frontend_log.txt
+
+# ===== 后端构建产物 =====
+target/
+*.class
+*.war
+
+# ===== .NET / WPF 构建产物 =====
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.baml
+
+# ===== Electron 打包产物 =====
+release/
+out/
+*.dmg
+*.exe
+*.msi
+*.AppImage
+*.snap
+*.asar
+
+# ===== Android / Gradle =====
+.gradle/
+StartupShell/AndroidShell/_gradle_extract/
+StartupShell/AndroidShell/gradle-*-bin.zip
+StartupShell/AndroidShell/local.properties
+local.properties
+*.apk
+*.aab
+*.jks
+*.keystore
+keystore.properties
+
+# ===== 版本控制元数据（SVN 残留）=====
+.svn/
+.git_backup_*/
+
+# ===== 系统 / 编辑器 =====
+.DS_Store
+._*
+__MACOSX/
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# ===== 环境变量与密钥 =====
+.env
+.env.local
+.env.*.local
+*.pem
+*.p12
+*.pfx
+secrets.*
+*secret*.json
+
+# ===== 运行时数据 / 日志 =====
+infra-data/
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+_compare_result_temp.txt
+
+# ===== 测试与覆盖率 =====
+coverage/
+.nyc_output/
+playwright-report/
+test-results/

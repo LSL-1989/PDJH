@@ -1,0 +1,392 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-icons.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+// main-container global css
+.app-container {
+  padding: 24px;
+  background-color: #F8F9FA; // md-admin-bg
+  min-height: calc(100vh - 50px);
+}
+
+/* 列表页工具栏：左侧查询/筛选/刷新，右侧新增等主操作 */
+.list-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  &__left,
+  &__query {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__right,
+  &__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .el-form-item {
+    margin-bottom: 0;
+  }
+
+  &--flat {
+    margin-bottom: 16px;
+  }
+}
+
+.filter-container.list-toolbar {
+  margin-bottom: 20px;
+}
+
+/* =========================================================================
+   Global Material Design 3 (MD3) Overrides
+   ========================================================================= */
+
+/* Base Typography & Resets */
+body {
+  font-family: "Google Sans", "Noto Sans SC", -apple-system, sans-serif;
+  color: #202124;
+  background-color: #F8F9FA;
+}
+
+/* 1. Global Borders & Radius */
+.el-card, .el-dialog, .el-message-box {
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.02) !important;
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.el-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* 圆角必须画在真正带边框的那一层。
+   Element Plus 的边框是 wrapper 上的 inset box-shadow，不是 .el-input__inner。 */
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper,
+.el-select-dropdown,
+.el-button {
+  border-radius: 8px !important;
+}
+
+/* 数字框两侧按钮的圆角跟随外框，避免按钮角和边框错开 */
+.el-input-number {
+  --el-border-radius-base: 8px;
+}
+
+/* 2. Color Palettes (Google Blue #4285F4) */
+:root {
+  --md-primary: #4285F4;
+  --md-primary-hover: #5A95F5;
+  --md-primary-active: #3367D6;
+  --md-success: #34A853;
+  --md-warning: #FBBC04;
+  --md-danger: #EA4335;
+  --md-surface: #FFFFFF;
+}
+
+/* 组件根节点自己声明了输入框变量，写在 :root 上盖不住，所以挂在控件上 */
+.el-input,
+.el-textarea,
+.el-input-number,
+.el-date-editor,
+.el-cascader,
+.el-autocomplete {
+  --el-input-border-color: #DADCE0;
+  --el-input-hover-border-color: #BDC1C6;
+  --el-input-focus-border-color: var(--md-primary);
+  --el-input-border-radius: 8px;
+}
+
+.el-select__wrapper {
+  box-shadow: 0 0 0 1px #DADCE0 inset;
+}
+.el-select__wrapper.is-hovering:not(.is-focused) {
+  box-shadow: 0 0 0 1px #BDC1C6 inset;
+}
+.el-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px var(--md-primary) inset;
+}
+
+.el-button--primary {
+  background-color: var(--md-primary) !important;
+  border-color: var(--md-primary) !important;
+}
+.el-button--primary:hover, .el-button--primary:focus {
+  background-color: var(--md-primary-hover) !important;
+  border-color: var(--md-primary-hover) !important;
+  box-shadow: 0 2px 4px rgba(66, 133, 244, 0.3);
+}
+
+/* 3. Inputs & Forms
+   聚焦高亮就是 wrapper / textarea 自己的那圈边框，不要再给 .el-input__inner 加描边。
+   内层 input 在 wrapper 内边距里，单独描边会和外边框错开，清空按钮也会落在圈外。 */
+.el-input__inner {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+}
+.el-input__inner:focus,
+.el-input__inner:focus-visible {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+.el-textarea__inner {
+  transition: box-shadow 0.2s;
+}
+
+/* 4. Tables */
+.el-table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+  border: none !important;
+}
+.el-table th.is-leaf {
+  background-color: #F8F9FA !important;
+  color: #5F6368 !important;
+  font-weight: 500 !important;
+  border-bottom: 1px solid #E8EAED !important;
+  padding: 12px 0 !important;
+}
+.el-table td {
+  border-bottom: 1px solid #F1F3F4 !important;
+  padding: 12px 0 !important;
+}
+.el-table--border::after, .el-table--group::after, .el-table::before {
+  display: none !important; /* Remove outer borders */
+}
+.el-table__row:hover > td {
+  background-color: #F8F9FA !important;
+}
+
+/* 列表操作列：仅图标按钮；禁用 cell 省略号避免出现 ".." */
+.table-action-col {
+  .cell {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+  }
+}
+
+.el-table__fixed-right,
+.el-table__fixed-right-patch {
+  .table-action-col .cell {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+  }
+}
+
+.table-action-btns {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.table-action-icon-wrap {
+  display: inline-flex;
+  flex-shrink: 0;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.table-action-icon-btn {
+  flex-shrink: 0;
+  padding: 4px !important;
+  margin: 0 !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  min-width: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 6px !important;
+
+  &--primary { color: #4285F4 !important; }
+  &--success { color: #34A853 !important; }
+  &--danger  { color: #EA4335 !important; }
+  &--warning { color: #FBBC04 !important; }
+  &--info    { color: #5F6368 !important; }
+
+  &:hover:not(.is-disabled) {
+    background-color: #F1F3F4 !important;
+  }
+}
+
+/* 5. Dialogs */
+.el-dialog__header {
+  padding: 24px 24px 16px !important;
+}
+.el-dialog__title {
+  font-weight: 500;
+  font-size: 20px;
+  color: #202124;
+}
+.el-dialog__body {
+  padding: 16px 24px 32px !important;
+  color: #5F6368;
+}
+.el-dialog__footer {
+  padding: 16px 24px 24px !important;
+  border-top: 1px solid #F1F3F4;
+}
+
+/* 右侧表单抽屉：仅表单体滚动，底栏按钮固定 */
+.form-drawer.el-drawer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
+}
+
+.form-drawer .el-drawer__header {
+  flex-shrink: 0;
+  margin-bottom: 0;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #F1F3F4;
+}
+
+.form-drawer .el-drawer__title {
+  font-weight: 500;
+  font-size: 18px;
+  color: #202124;
+}
+
+.form-drawer .el-drawer__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px 24px;
+  color: #5F6368;
+}
+
+.form-drawer .el-drawer__footer {
+  flex-shrink: 0;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #F1F3F4;
+  background: #fff;
+}
+
+.form-drawer__footer {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.form-drawer .el-form-item .el-input,
+.form-drawer .el-form-item .el-select,
+.form-drawer .el-form-item .el-cascader,
+.form-drawer .el-form-item .el-date-editor,
+.form-drawer .el-form-item .el-textarea,
+.form-drawer .el-form-item .el-input-number {
+  width: 100%;
+}
+
+/* 6. Tags (Status Badges) */
+.el-tag {
+  border-radius: 16px !important;
+  padding: 0 12px !important;
+  font-weight: 500;
+  border: none !important;
+}
+.el-tag--success { background-color: #E6F4EA !important; color: #137333 !important; }
+.el-tag--warning { background-color: #FEF7E0 !important; color: #B06000 !important; }
+.el-tag--danger  { background-color: #FCE8E6 !important; color: #C5221F !important; }
+.el-tag--primary { background-color: #E8F0FE !important; color: #1967D2 !important; }
+.el-tag--info    { background-color: #F1F3F4 !important; color: #3C4043 !important; }
+
+/* 7. Pagination */
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: var(--md-primary) !important;
+  color: #FFF !important;
+  border-radius: 4px;
+}
+.el-pagination.is-background .el-pager li {
+  border-radius: 4px;
+  background-color: #F1F3F4 !important;
+  color: #3C4043;
+}

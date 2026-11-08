@@ -1,0 +1,89 @@
+/* 后台「大屏显示内容配置」驱动的全局样式变量与布局 */
+
+.screen-content-root {
+  --screen-font-size: 32px;
+  --screen-theme-color: #1a73e8;
+  --screen-marquee-duration: 15s;
+}
+
+.screen-theme-light#app,
+.screen-theme-light {
+  background-color: #f8f9fa;
+  color: #202124;
+}
+
+.screen-theme-dark#app,
+.screen-theme-dark {
+  background-color: #202124;
+  color: #e8eaed;
+}
+
+/* 主题色：底栏、徽章、强调色 */
+.screen-content-root .bottom-bar {
+  background: var(--screen-theme-color) !important;
+}
+
+.screen-content-root .waiting-queue-card .badge,
+.screen-content-root .badge-pulse {
+  background: var(--screen-theme-color) !important;
+}
+
+/* 字号：叫号区主字体 */
+.screen-content-root .seq-num,
+.screen-content-root .focus-seq,
+.screen-content-root .focus-name,
+.screen-content-root .pat-name,
+.screen-content-root .current-num,
+.screen-content-root .current-name,
+.screen-content-root .wait-seq,
+.screen-content-root .wait-name {
+  font-size: var(--screen-font-size) !important;
+}
+
+.screen-content-root .marquee-text {
+  animation-duration: var(--screen-marquee-duration) !important;
+}
+
+/* 布局：单列 — 隐藏左侧当前叫号/过号，等候区占满 */
+.screen-layout-1col .left-panel,
+.screen-layout-1col .doctor-panel {
+  display: none !important;
+}
+
+.screen-layout-1col .right-panel,
+.screen-layout-1col .queue-panel {
+  flex: 1 !important;
+  width: 100% !important;
+}
+
+.screen-layout-1col .content-wrapper {
+  flex-direction: column;
+}
+
+/* 布局：三列 — 等候列表三列网格 */
+.screen-layout-3col .list-item,
+.screen-layout-3col .waiting-item {
+  width: calc(33.333% - 1vw) !important;
+}
+
+.screen-layout-3col .grid-item {
+  width: calc(25% - 0.7vw) !important;
+}
+
+/* 布局：全屏大号 — 放大当前叫号、弱化等候列表 */
+.screen-layout-full .left-panel {
+  flex: 2 !important;
+}
+
+.screen-layout-full .right-panel {
+  flex: 0.8 !important;
+}
+
+.screen-layout-full .focus-name,
+.screen-layout-full .current-name {
+  font-size: calc(var(--screen-font-size) * 1.8) !important;
+}
+
+.screen-layout-full .past-call-card {
+  display: none !important;
+}

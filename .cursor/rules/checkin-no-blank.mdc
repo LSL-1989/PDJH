@@ -1,0 +1,36 @@
+---
+description: 自助签到 H5 防白屏结构冻结（对齐门边屏可跑通形态，禁止再改出空白）
+globs: HJ自助签到终端/**/*,StartupShell/AndroidShell/**/*,docs/android/**
+alwaysApply: false
+---
+
+# 自助签到终端：防白屏结构（已验证可打开，勿破坏）
+
+平板 Chrome / 安卓签到壳已能打开。后续改签到端或壳联调时，**保持下列结构**，禁止为「优化」再引入曾导致白屏的写法。
+
+## 冻结项（勿改回）
+
+| 项 | 必须保持 | 禁止 |
+|---|---|---|
+| `vite.config.ts` | `base: '/checkin/'`；`server.port=5174`；`strictPort: true`；`host: true`；精简 `plugins: [vue()]`；`optimizeDeps.include` 含 `@pdjh/common/*` | `hmr: false` + 剥离 `@vite/client`；端口被占时跳到 5176；去掉 `strictPort` |
+| `src/config/env.ts` | `import.meta.env.DEV` / `VITE_*` | Vite `define` 注入全局 `__DEV__` / `__VITE_*`（无 client 时安卓直接 ReferenceError 白屏） |
+| `src/router` | `createWebHashHistory()` | `createWebHistory`（安卓路径易挂） |
+| `src/main.ts` | `initViewportCssVars()` 后 `createApp().use(router).mount`；**不**全局 `app.use(vant)` | 入口全量引入 `vant` + CSS |
+| 视口 | `useScreenScale` 用 `innerHeight` + `--viewport-height`；`ScreenFrame` `position:fixed` | 依赖 `100dvh` / 仅 `visualViewport` 算高度 |
+| 壳 `SERVER_BASE` | 服务根如 `http://192.168.0.75:5174`（**勿**带 `/checkin`） | 写成 `:5173` 或 `…/checkin` |
+| 访问 URL | `http://<IP>:5174/checkin/`（Hash 如 `#/bind`） | 根路径无 `/checkin/`；或访问 5176 等漂移端口 |
+
+## 与门边屏对齐原则
+
+签到端联调形态对齐 `HJ诊室门边屏终端` 的精简 Vite + Hash + `import.meta.env` + 视口 CSS 变量。门边屏能开、签到不能开时，先 diff 上述冻结项，而不是再加插件/关 HMR。
+
+## 联调检查
+
+- [ ] 本机只跑一份签到 Vite，且监听 **5174**（`strictPort` 失败则先杀占端口进程）
+- [ ] 平板打开 `http://<本机IP>:5174/checkin/`，不是 5176
+- [ ] 壳长按服务根仅为 `http://<IP>:5174`
+- [ ] 若白屏：看 `index.html` 内 `#pdjh-boot-error` 红字，再查 Network 是否 404
+
+## 交付
+
+改签到 H5 / 签到壳后，用平板或壳打开 `/checkin/` 确认非空白再交付；勿在未验证安卓的情况下合并「关 HMR / define 全局 / History 路由 / 入口全量 vant」类改动。

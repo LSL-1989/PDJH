@@ -1,0 +1,50 @@
+{
+  "name": "vue-admin-template",
+  "version": "4.4.0",
+  "description": "HJ管理后台：Vue 3 + Element Plus + Vuex",
+  "author": "Pan <panfree23@gmail.com>",
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build:prod": "vue-cli-service build",
+    "build:stage": "vue-cli-service build --mode staging",
+    "preview": "node build/index.js --preview",
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
+    "lint": "eslint --fix --ext .js,.vue src"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "axios": "^1.7.9",
+    "core-js": "^3.39.0",
+    "echarts": "^5.2.2",
+    "element-plus": "^2.9.4",
+    "js-cookie": "^3.0.5",
+    "mitt": "^3.0.1",
+    "moment": "^2.29.4",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "path-browserify": "^1.0.1",
+    "path-to-regexp": "0.1.7",
+    "screenfull": "^5.2.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "sass": "^1.83.0",
+    "sass-loader": "^13.3.3",
+    "svg-sprite-loader": "^6.0.11",
+    "svgo": "^2.8.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "engines": {
+    "node": ">=16",
+    "npm": ">= 8.0.0"
+  },
+  "license": "MIT"
+}
